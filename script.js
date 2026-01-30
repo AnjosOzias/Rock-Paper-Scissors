@@ -1,52 +1,57 @@
 let humanScore = 0
 let computerScore = 0
 
-let valorAleatorio = Math.random()
-let resultado = 0
+
+let result = 0
+let round= 3
 function getComputerChoice(){
-    if(valorAleatorio < 0.33){
-        return "pedra"
-    }else if(valorAleatorio > 0.33 && valorAleatorio < 0.66){
-        return "papel"   
+    let randomValue = Math.random()
+    if(randomValue <= 0.33){
+        return "rock"
+    }else if(randomValue > 0.33 && randomValue < 0.66){
+        return "paper"   
     }else{
-        return "tesoura"
-    }
-        
-    console.log(resultado)
+        return "scissors"
+     }
 }
 
 function getHumanChoice(){
-    let nome = prompt("Digite uma opção")
-    return nome
+
+    let name = prompt("Enter an option")
+    return name
+    
 }
 
-function playRound(getComputerChoice,getHumanChoice){
-
-        if (computerSelection == "pedra" && humanSelection == "tesoura"){
+function playRound(computerSelection,humanSelection ){
+  
+        if (computerSelection == "rock" && humanSelection == "scissors"){
             computerScore++
-            return console.log("A pedra do computador venceu a sua tesoura.")
+            return console.log("The computer’s rock beat your scissors.")
             
-        }else if(computerSelection == "tesoura" && humanSelection == "pedra"){
+        }else if(computerSelection == "scissors" && humanSelection == "rock"){
             humanScore++
-            return  console.log("A sua pedra venceu a tesoura do computador")
+            return  console.log("Your rock beat the computer’s scissors.")
 
-        }else if(computerSelection == "pedra" && humanSelection == "papel"){
+        }else if(computerSelection == "rock" && humanSelection == "paper"){
             humanScore++
-            return  console.log("O seu papel venceu a pedra do computador")
+            return  console.log("Your paper beat the computer’s rock.")
 
-        }else if(computerSelection == "papel" && humanSelection == "pedra"){
+        }else if(computerSelection == "paper" && humanSelection == "rock"){
             computerScore++
-            return  console.log("O papel do computador venceu sua pedra")   
+            return  console.log("The computer’s paper beat your rock.")   
 
-        }else if(computerSelection == "papel" && humanSelection == "tesoura"){
+        }else if(computerSelection == "paper" && humanSelection == "scissors"){
             humanScore++
-            return  console.log("Sua tesoura venceu o papel do computador")
+            return  console.log("Your scissors beat the computer’s paper.")
 
-        }else if(computerSelection == "papel" && humanSelection == "tesoura"){
+        }else if(computerSelection == "paper" && humanSelection == "scissors"){
             computerScore++
-            return  console.log("A tesoura do computador vence o seu papel")
-        } else{
-            console.log("nenhuma das opcoes")
+            return  console.log("Computer’s scissors beat your paper.")
+        
+        } else if(computerSelection == humanSelection){
+            return console.log("empate")
+        }else{
+            return console.log("Digite umas das opções corretamente")
         }
 }
 
@@ -54,7 +59,83 @@ const humanSelection = getHumanChoice()
 const computerSelection = getComputerChoice()
 
 function playGame(){
-playRound(getHumanChoice(),getComputerChoice())
-playRound(getHumanChoice(),getComputerChoice())
-
+    for(let i = 0; i<=round; i++)
+    console.log(playRound(getComputerChoice(), getHumanChoice()))
+    
 }
+playGame()
+console.log(` The computer scored ${computerScore} points`)
+console.log(` You scored ${humanScore} points`)
+
+// let humanScore = 0;
+// let computerScore = 0;
+
+// // Gerar o valor dentro da função garante que o PC mude a escolha a cada rodada
+// function getComputerChoice() {
+//     let randomValue = Math.random();
+//     if (randomValue <= 0.33) {
+//         return "rock";
+//     } else if (randomValue > 0.33 && randomValue < 0.66) {
+//         return "paper";
+//     } else {
+//         return "scissors";
+//     }
+// }
+
+// function getHumanChoice() {
+//     let choice = prompt("Enter an option (rock, paper, scissors):");
+//     return choice ? choice.toLowerCase() : ""; 
+// }
+
+// // Passamos as escolhas já sorteadas/digitadas como argumentos
+// function playRound(computerSelection, humanSelection) {
+//     if (computerSelection === "rock" && humanSelection === "scissors") {
+//         computerScore++;
+//         console.log("The computer’s rock beat your scissors.");
+//     } else if (computerSelection === "scissors" && humanSelection === "rock") {
+//         humanScore++;
+//         console.log("Your rock beat the computer’s scissors.");
+//     } else if (computerSelection === "rock" && humanSelection === "paper") {
+//         humanScore++;
+//         console.log("Your paper beat the computer’s rock.");
+//     } else if (computerSelection === "paper" && humanSelection === "rock") {
+//         computerScore++;
+//         console.log("The computer’s paper beat your rock.");
+//     } else if (computerSelection === "paper" && humanSelection === "scissors") {
+//         humanScore++;
+//         console.log("Your scissors beat the computer’s paper.");
+//     } else if (computerSelection === "scissors" && humanSelection === "paper") {
+//         computerScore++;
+//         console.log("Computer’s scissors beat your paper.");
+//     } else if (computerSelection === humanSelection) {
+//         console.log("Empate nesta rodada!");
+//     } else {
+//         console.log("Opção inválida: " + humanSelection);
+//     }
+// }
+
+// function playGame() {
+//     // Loop de 5 rodadas (i = 0 até 4)
+//     for (let i = 0; i < 5; i++) {
+//         console.log(`--- Rodada ${i + 1} ---`);
+//         const computerSelection = getComputerChoice();
+//         const humanSelection = getHumanChoice();
+        
+//         playRound(computerSelection, humanSelection);
+//     }
+    
+//     // Resultado Final após o loop
+//     console.log("--- RESULTADO FINAL ---");
+//     console.log(`The computer scored ${computerScore} points`);
+//     console.log(`You scored ${humanScore} points`);
+// }
+
+// playGame();
+// Use o código com cuidado.
+
+// O que foi corrigido:
+// Escopo do Math.random(): No seu código original, ele estava fora das funções. Isso fazia com que o computador escolhesse a mesma opção em todas as 5 rodadas. Agora ele está dentro de getComputerChoice.
+// Argumentos da Função: Na função playRound, você estava tentando usar os nomes das funções como variáveis. O correto é chamar as funções fora e passar os resultados delas para a playRound.
+// Iteração do Loop: Usei for (let i = 0; i < 5; i++) para garantir que o prompt apareça exatamente 5 vezes conforme solicitado.
+// Consistência: Adicionei .toLowerCase() no prompt para evitar erros caso o usuário digite "Rock" com letra maiúscula.
+// Você gostaria de adicionar uma mensagem de vencedor final (quem fez mais pontos) ao término das 5 rodadas?
