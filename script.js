@@ -1,71 +1,142 @@
 let humanScore = 0
 let computerScore = 0
 
+const opcoes = ["pedra", "papel", "tesoura"];
+const btn = document.querySelector(".btn")
+const btnRock = document.querySelector("#btnRock")
+const btnPaper = document.querySelector("#btnPaper")
+const btnScissors = document.querySelector("#btnScissors")
+const resultado = document.querySelector("#resultado")
 
-let result = 0
-let round= 3
-function getComputerChoice(){
-    let randomValue = Math.random()
-    if(randomValue <= 0.33){
-        return "rock"
-    }else if(randomValue > 0.33 && randomValue < 0.66){
-        return "paper"   
-    }else{
-        return "scissors"
-     }
-}
-
-function getHumanChoice(){
-
-    let name = prompt("Enter an option")
-    return name
+document.body.addEventListener("click", (event) => {
+ 
+    if(!event.target.classList.contains("btn")) return;
+    console.log(event.target)
+    const escolhaHumano = event.target.textContent
+    const escolhaComputador = opcoes[Math.floor(Math.random() * opcoes.length)];
+    let mensagem = ""
     
-}
+    if(escolhaHumano === escolhaComputador){
+        mensagem =  "Empate!"
+    }else if(
+        (escolhaHumano === "pedra" && escolhaComputador === "tesoura") ||
+        (escolhaHumano === "papel" && escolhaComputador === "pedra") ||
+        (escolhaHumano === "tesoura" && escolhaComputador === "papel")
+    ){  humanScore++
+        mensagem =  "Você venceu!"
+    } else {
+        computerScore++
+        mensagem = "O computador venceu!"
+      }
+    
+    p.textContent = `
+        Você: ${escolhaHumano} | 
+        Computador: ${escolhaComputador} | 
+        Resultado: ${mensagem} |
+    `;
+    para.textContent = `Pontos PC: ${computerScore} | Pontos humanos: ${humanScore}`
+     
+});
+const p = document.createElement("p");
+resultado.appendChild(p);
+const div = document.createElement("div")
+const para = document.createElement("p")
 
-function playRound(computerSelection,humanSelection ){
+resultado.appendChild(para)
+
+
+
+
+// let humanScore = 0
+// let computerScore = 0
+
+
+// let result = 0
+// let round= 3
+// function getComputerChoice(){
+//     let randomValue = Math.random()
+//     if(randomValue <= 0.33){
+//         return "rock"
+//     }else if(randomValue > 0.33 && randomValue < 0.66){
+//         return "paper"   
+//     }else{
+//         return "scissors"
+//      }
+// }
+
+
+// const btn = document.querySelector(".btn")
+// const btnRock = document.querySelector("#btnRock")
+// const btnPaper = document.querySelector("#btnPaper")
+// const btnScissors = document.querySelector("#btnScissors")
+// const resultado = document.querySelector("#resultado")
+
+// btnRock.addEventListener("click",(evt)=>{
+// const humanSelection = evt.target.textContent.toLowerCase()
+// const computerSelection = getComputerChoice()
+// playRound(computerSelection, humanSelection)
+// const message = playRound(computerSelection, humanSelection)
+
+// const p = document.createElement("p")
+// p.textContent = message
+// resultado.textContent = `${message} |Placar: Você ${humanScore} - PC ${computerScore}`;
+// })
+
+// btnPaper.addEventListener("click",(evt)=>{
+// const humanSelection = evt.target.textContent.toLowerCase()
+// const computerSelection = getComputerChoice()
+// const message = playRound(computerSelection, humanSelection)
+
+// const p = document.createElement("p")
+// p.textContent = message
+// resultado.textContent = `${message} |Placar: Você ${humanScore} - PC ${computerScore}`;
+
+// })
+
+// btnScissors.addEventListener("click",(evt)=>{
+// const humanSelection = evt.target.textContent.toLowerCase()
+// const computerSelection = getComputerChoice()
+// const message = playRound(computerSelection, humanSelection)
+
+// const p = document.createElement("p")
+// p.textContent = message
+// resultado.textContent = `${message} |Placar: Você ${humanScore} - PC ${computerScore}`;
+// })
+
+
+// function playRound(computerSelection,humanSelection ){
   
-        if (computerSelection == "rock" && humanSelection == "scissors"){
-            computerScore++
-            return console.log("The computer’s rock beat your scissors.")
+//         if (computerSelection == "rock" && humanSelection == "scissors"){
+//             computerScore++
+//             return "The computer’s rock beat your scissors."
             
-        }else if(computerSelection == "scissors" && humanSelection == "rock"){
-            humanScore++
-            return  console.log("Your rock beat the computer’s scissors.")
+//         }else if(computerSelection == "scissors" && humanSelection == "rock"){
+//             humanScore++
+//             return "Your rock beat the computer’s scissors."
 
-        }else if(computerSelection == "rock" && humanSelection == "paper"){
-            humanScore++
-            return  console.log("Your paper beat the computer’s rock.")
+//         }else if(computerSelection == "rock" && humanSelection == "paper"){
+//             humanScore++
+//             return "Your paper beat the computer’s rock."
 
-        }else if(computerSelection == "paper" && humanSelection == "rock"){
-            computerScore++
-            return  console.log("The computer’s paper beat your rock.")   
+//         }else if(computerSelection == "paper" && humanSelection == "rock"){
+//             computerScore++
+//             return "The computer’s paper beat your rock."
 
-        }else if(computerSelection == "paper" && humanSelection == "scissors"){
-            humanScore++
-            return  console.log("Your scissors beat the computer’s paper.")
+//         }else if(computerSelection == "paper" && humanSelection == "scissors"){
+//             humanScore++
+//             return "Your scissors beat the computer’s paper."
 
-        }else if(computerSelection == "paper" && humanSelection == "scissors"){
-            computerScore++
-            return  console.log("Computer’s scissors beat your paper.")
-        
-        } else if(computerSelection == humanSelection){
-            return console.log("empate")
-        }else{
-            return console.log("Digite umas das opções corretamente")
-        }
-}
+//         }else if(computerSelection == "scissors" && humanSelection == "paper"){
+//             computerScore++
+//             return "The computer’s scissors beat your paper."
 
-const humanSelection = getHumanChoice()
-const computerSelection = getComputerChoice()
+//         }else  {computerSelection == humanSelection
+//             return "empate"
+//         }    
+// }
 
-function playGame(){
-    for(let i = 0; i<=round; i++)
-    console.log(playRound(getComputerChoice(), getHumanChoice()))
-    
-}
-playGame()
-console.log(` The computer scored ${computerScore} points`)
-console.log(` You scored ${humanScore} points`)
+// console.log(` The computer scored ${computerScore} points`)
+// console.log(` You scored ${humanScore} points`)
 
 // let humanScore = 0;
 // let computerScore = 0;
